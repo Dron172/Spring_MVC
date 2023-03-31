@@ -1,5 +1,6 @@
 package org.example.repository;
 
+import org.example.exception.NotFoundException;
 import org.example.model.Post;
 import org.springframework.stereotype.Repository;
 
@@ -32,6 +33,11 @@ public class PostRepository {
     return post;
   }
   public void removeById(long id) {
-    posts.remove(id);
+    if (posts.containsKey(id)) {
+      posts.remove(id);
+    } else {
+      throw new NotFoundException();
+    }
+  }
   }
 }
